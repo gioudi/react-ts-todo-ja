@@ -185,9 +185,9 @@ const HomeScreen = () => {
               className="p-2 border rounded-lg w-full"
             >
               <option value="Todos">Todos</option>
-              <option value="To do">Por hacer</option>
-              <option value="In progress">En progreso</option>
-              <option value="Completed">Completado</option>
+              <option value="Por hacer">Por hacer</option>
+              <option value="En progreso">En progreso</option>
+              <option value="Completado">Completado</option>
             </select>
           </div>
           <div>
@@ -200,9 +200,9 @@ const HomeScreen = () => {
               className="p-2 border rounded-lg w-full"
             >
               <option value="Todas">Todas</option>
-              <option value="Low">Baja</option>
-              <option value="Medium">Media</option>
-              <option value="High">Alta</option>
+              <option value="Baja">Baja</option>
+              <option value="Media">Media</option>
+              <option value="Alta">Alta</option>
             </select>
           </div>
           <div>
