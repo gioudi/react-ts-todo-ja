@@ -80,7 +80,15 @@ const HomeScreen = () => {
     }
 
     if (due_dateFilter) {
-      filtered = filtered.filter((task) => task.due_date === due_dateFilter);
+
+      const selectedDate = new Date(due_dateFilter);
+      const formattedSelectedDate = selectedDate.toISOString().split('T')[0];
+
+      filtered = filtered.filter((task) => {
+        const taskDate = new Date(task.due_date);
+        const formattedTaskDate = taskDate.toISOString().split('T')[0];
+        return formattedTaskDate === formattedSelectedDate;
+      });
     }
 
     setFilteredTasks(filtered);
@@ -122,7 +130,7 @@ const HomeScreen = () => {
 
   const handleCloseCreateModal = () => {
     setIsCreateModalOpen(false);
-  
+
   };
 
   if (loading) {
