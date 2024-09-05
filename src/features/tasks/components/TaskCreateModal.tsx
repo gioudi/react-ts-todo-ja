@@ -72,7 +72,7 @@ const TaskCreateModal: React.FC<TaskCreateModalProps> = ({
     if (validateForm()) {
       dispatch(
         handleCreateTask({
-          id: tasks.length > 0 ? tasks.length + 1 : 1,
+          id: Math.floor(Math.random() * 1000) + 1,
           name,
           status,
           priority,
