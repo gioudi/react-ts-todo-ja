@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { handleCreateTask, handleFetchTasks } from '../redux/tasksSlice';
-import { AppState } from '../../../store/store';
+import { AppDispatch, AppState } from '../../../store/store';
 
 interface TaskCreateModalProps {
   isOpen: boolean;
@@ -12,7 +12,7 @@ const TaskCreateModal: React.FC<TaskCreateModalProps> = ({
   isOpen,
   onClose,
 }) => {
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
   const [name, setName] = useState('');
   const [status, setStatus] = useState('Por hacer');
   const [priority, setPriority] = useState('Baja');

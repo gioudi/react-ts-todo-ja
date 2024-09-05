@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppState } from '../../../store/store';
+import { AppDispatch, AppState } from '../../../store/store';
 import { handleFetchTasks } from '../redux/tasksSlice';
 import AlertComponent from '../../../components/Alerts/AlertComponent';
 import TaskCard from '../components/TaskCard';
@@ -10,7 +10,7 @@ import TaskCreateModal from '../components/TaskCreateModal';
 import SpinnerComponent from '../../../components/Spinner/SpinnerComponent';
 
 const HomeScreen = () => {
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
   const {
     tasks,
     error: gettingError,

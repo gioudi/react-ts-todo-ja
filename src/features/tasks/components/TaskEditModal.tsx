@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Task } from '../redux/types';
 import { useDispatch } from 'react-redux';
 import { handleDeleteTask, handleUpdateTask } from '../redux/tasksSlice';
+import { AppDispatch } from '../../../store/store';
 
 interface TaskEditModalProps {
   isOpen: boolean;
@@ -14,7 +15,7 @@ const TaskEditModal: React.FC<TaskEditModalProps> = ({
   onClose,
   task,
 }) => {
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
   const [name, setName] = useState(task?.name || '');
   const [status, setStatus] = useState(task?.status || 'Por hacer');
   const [priority, setPriority] = useState(task?.priority || 'Baja');
@@ -91,7 +92,7 @@ const TaskEditModal: React.FC<TaskEditModalProps> = ({
 
   const handleDelete = () => {
     if (task) {
-      dispatch(handleDeleteTask(task.id));
+      dispatch(handleDeleteTask(String(task.id)));
       onClose();
     }
   };
