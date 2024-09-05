@@ -17,6 +17,12 @@ I used React and Redux for frontend. Moreover as a developer always looking to i
 
 ## Features
 - Sing up form: To access the dashboard is necessary fill out the form and submit the information.
+- It's mandatory use those given credentials: 
+-- {
+    "email": "eve.holt@reqres.in",
+    "password": "pistol"
+-- }
+
 - Sing in: Once you are registered correctly, go to login and fill out the form, next press login button
 - It's mandatory use those given credentials: 
 
