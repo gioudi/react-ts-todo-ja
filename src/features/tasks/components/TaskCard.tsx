@@ -11,13 +11,16 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, grouping, onEdit }) => {
   return (
     <div className="p-4 bg-white shadow-md rounded-lg mb-4 transition-transform hover:scale-105 hover:shadow-lg h-[350px]">
       <h2 className="text-xl font-bold mb-6 overflow-x-hidden">{task.name}</h2>
-      {task.image && (
+      {task.image ? (
         <img
-          src={task.image }
+          src={task.image}
           alt={task.name}
-          className="w-full h-32 object-cover rounded-md mb-2"
+          className="w-full  h-[150px] object-cover rounded-md mb-2"
         />
-      )}
+      ): <div
+          className="w-full bg-gray-600 shadows-sm h-[150px] object-cover rounded-md mb-2"
+        /> }
+
 
       <p className="text-sm text-gray-600 mb-6">
         {grouping === 'estatus' && (

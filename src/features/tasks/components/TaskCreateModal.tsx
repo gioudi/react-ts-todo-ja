@@ -14,8 +14,8 @@ const TaskCreateModal: React.FC<TaskCreateModalProps> = ({
 }) => {
   const dispatch: AppDispatch = useDispatch();
   const [name, setName] = useState('');
-  const [status, setStatus] = useState('Por hacer');
-  const [priority, setPriority] = useState('Baja');
+  const [status, setStatus] = useState<any>('Por hacer');
+  const [priority, setPriority] = useState<any>('Baja');
   const [image, setImage] = useState('');
   const [due_date, setdue_date] = useState('');
   const [description, setDescription] = useState('');
@@ -86,8 +86,8 @@ const TaskCreateModal: React.FC<TaskCreateModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
-      <div className="bg-white p-6 rounded-lg shadow-lg w-11/12 md:w-1/2 lg:w-1/3">
+    <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50  ">
+      <div className="bg-white p-6 rounded-lg shadow-lg w-11/12 md:w-1/2 lg:w-1/3  animate-fadeIn">
         <h3 className="text-xl font-semibold mb-4">Crear Nueva Tarea</h3>
         <div className="mb-4">
           <label className="block text-sm font-semibold">Nombre</label>

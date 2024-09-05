@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Task } from '../redux/types';
+import { Task, Status } from '../redux/types';
 import { useDispatch } from 'react-redux';
 import { handleDeleteTask, handleUpdateTask } from '../redux/tasksSlice';
 import { AppDispatch } from '../../../store/store';
@@ -17,8 +17,8 @@ const TaskEditModal: React.FC<TaskEditModalProps> = ({
 }) => {
   const dispatch: AppDispatch = useDispatch();
   const [name, setName] = useState(task?.name || '');
-  const [status, setStatus] = useState(task?.status || 'Por hacer');
-  const [priority, setPriority] = useState(task?.priority || 'Baja');
+  const [status, setStatus] = useState<any>(task?.status || 'Por hacer');
+  const [priority, setPriority] = useState<any>(task?.priority || 'Baja');
   const [image, setImage] = useState(task?.image || '');
   const [due_date, setdue_date] = useState(task?.due_date || '');
   const [description, setDescription] = useState(task?.description || '');
@@ -99,7 +99,7 @@ const TaskEditModal: React.FC<TaskEditModalProps> = ({
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
-      <div className="bg-white p-6 rounded-lg shadow-lg w-11/12 md:w-1/2 lg:w-1/3">
+      <div className="bg-white p-6 rounded-lg shadow-lg w-11/12 md:w-1/2 lg:w-1/3 animate-fadeIn">
         <h3 className="text-xl font-semibold mb-4">Editar Tarea</h3>
         <div className="mb-4">
           <label className="block text-sm font-semibold">Nombre</label>

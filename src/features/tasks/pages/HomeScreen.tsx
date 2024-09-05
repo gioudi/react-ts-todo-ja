@@ -222,7 +222,7 @@ const HomeScreen = () => {
             key={task.id}
             task={task}
             grouping="estatus"
-            onEdit={() => handleEditClick(task)}
+            onEdit={async () => handleEditClick(task)}
           />
         ))}
       </article>

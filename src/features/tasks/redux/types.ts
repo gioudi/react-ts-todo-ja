@@ -1,5 +1,5 @@
-type Status = 'Por hacer' | 'En progreso' | 'Completado';
-type Priority = 'Baja' | 'Media' | 'Alta';
+export type Status = 'Por hacer' | 'En progreso' | 'Completado';
+export type Priority = 'Baja' | 'Media' | 'Alta';
 export interface Task {
   id: number;
   name: string;
