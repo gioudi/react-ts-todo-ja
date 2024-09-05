@@ -4,6 +4,7 @@ import { Task } from '../../tasks/redux/types';
 interface TaskCardProps {
   task: Task;
   grouping: 'estatus' | 'prioridad' | 'fechaFinal';
+  onEdit: ()=> {}
 }
 
 const TaskCard: React.FC<TaskCardProps> = ({ task, grouping, onEdit }) => {
