@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Task } from '../redux/types';
+import { Task, Status } from '../redux/types';
 import { useDispatch } from 'react-redux';
 import { handleDeleteTask, handleUpdateTask } from '../redux/tasksSlice';
+import { AppDispatch } from '../../../store/store';
 
 interface TaskEditModalProps {
   isOpen: boolean;
@@ -14,12 +15,12 @@ const TaskEditModal: React.FC<TaskEditModalProps> = ({
   onClose,
   task,
 }) => {
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
   const [name, setName] = useState(task?.name || '');
-  const [status, setStatus] = useState(task?.status || 'Por hacer');
-  const [priority, setPriority] = useState(task?.priority || 'Baja');
+  const [status, setStatus] = useState<any>(task?.status || 'Por hacer');
+  const [priority, setPriority] = useState<any>(task?.priority || 'Baja');
   const [image, setImage] = useState(task?.image || '');
-  const [dueDate, setDueDate] = useState(task?.dueDate || '');
+  const [due_date, setdue_date] = useState(task?.due_date || '');
   const [description, setDescription] = useState(task?.description || '');
   const [formErrors, setFormErrors] = useState<{ [key: string]: string }>({});
 
@@ -50,10 +51,10 @@ const TaskEditModal: React.FC<TaskEditModalProps> = ({
         'El nombre no puede comenzar o terminar con "_" o con espacios.';
     }
 
-    if (!dueDate) {
-      errors.dueDate = 'La fecha de entrega es obligatoria.';
-    } else if (dueDate < currentDate) {
-      errors.dueDate =
+    if (!due_date) {
+      errors.due_date = 'La fecha de entrega es obligatoria.';
+    } else if (due_date < currentDate) {
+      errors.due_date =
         'La fecha de entrega no puede ser menor a la fecha de hoy.';
     }
 
@@ -80,7 +81,7 @@ const TaskEditModal: React.FC<TaskEditModalProps> = ({
             status,
             priority,
             image,
-            dueDate,
+            due_date,
             description,
           })
         );
@@ -91,14 +92,14 @@ const TaskEditModal: React.FC<TaskEditModalProps> = ({
 
   const handleDelete = () => {
     if (task) {
-      dispatch(handleDeleteTask(task.id));
+      dispatch(handleDeleteTask(String(task.id)));
       onClose();
     }
   };
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
-      <div className="bg-white p-6 rounded-lg shadow-lg w-11/12 md:w-1/2 lg:w-1/3">
+      <div className="bg-white p-6 rounded-lg shadow-lg w-11/12 md:w-1/2 lg:w-1/3 animate-fadeIn">
         <h3 className="text-xl font-semibold mb-4">Editar Tarea</h3>
         <div className="mb-4">
           <label className="block text-sm font-semibold">Nombre</label>
@@ -160,12 +161,12 @@ const TaskEditModal: React.FC<TaskEditModalProps> = ({
           </label>
           <input
             type="date"
-            value={dueDate}
-            onChange={(e) => setDueDate(e.target.value)}
-            className={`p-2 border rounded-lg w-full ${formErrors.dueDate ? 'border-red-500' : ''}`}
+            value={due_date}
+            onChange={(e) => setdue_date(e.target.value)}
+            className={`p-2 border rounded-lg w-full ${formErrors.due_date ? 'border-red-500' : ''}`}
           />
-          {formErrors.dueDate && (
-            <p className="text-red-500 text-sm">{formErrors.dueDate}</p>
+          {formErrors.due_date && (
+            <p className="text-red-500 text-sm">{formErrors.due_date}</p>
           )}
         </div>
         <div className="mb-4">
