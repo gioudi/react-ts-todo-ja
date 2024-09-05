@@ -11,6 +11,7 @@
     "@types/react-dom": "^18.3.0",
     "axios": "^1.7.7",
     "dotenv": "^16.4.5",
+    "env-cmd": "^10.1.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-redux": "^9.1.2",
@@ -21,17 +22,20 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "env-cmd -f .env.local react-scripts start",
+    "build": "env-cmd -f .env.local react-scripts build",
     "test": "jest",
     "test:watch": "jest --watch",
     "eject": "react-scripts eject",
     "lint": "eslint \"src/*.{js,jsx,ts,tsx}\"",
     "lint:fix": "eslint --fix \"src/*.{js,jsx,ts,tsx}\"",
     "format": "prettier --write 'src/**/*.{ts,tsx,js,jsx,json,css,md}'",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "start:dev": "env-cmd -f .env.development react-scripts start",
+    "start:prod": "env-cmd -f .env.production react-scripts start",
+    "build:dev": "env-cmd -f .env.development react-scripts build",
+    "build:prod": "env-cmd -f .env.production react-scripts build"
   },
- 
   "hooks": {
     "pre-commit": "npm test && npm run foo"
   },
