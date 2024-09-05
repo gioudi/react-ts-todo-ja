@@ -4,23 +4,31 @@ import apiClient from '../../../api';
 
 const initialState: AuthState = {
   user: null,
-  token: null,
+  token: localStorage.getItem('authToken') || null,
   loading: false,
   error: null,
   isLogged: false,
 };
 
+export const isAuthenticated = () => {
+  return !!localStorage.getItem('authToken');
+};
 
+export const handleLogin = createAsyncThunk(
+  'auth/login',
+  async (payload: LoginPayload) => {
+    const response = await apiClient.post('/login', payload);
+    return response.data;
+  }
+);
 
-export const handleLogin = createAsyncThunk('auth/login', async (payload: LoginPayload) => {
-  const response = await apiClient.post('/login', payload); 
-  return response.data;
-});
-
-export const handleRegister = createAsyncThunk('auth/register', async (payload: LoginPayload) => {
-  const response = await apiClient.post('/register', payload);
-  return response.data;
-});
+export const handleRegister = createAsyncThunk(
+  'auth/register',
+  async (payload: LoginPayload) => {
+    const response = await apiClient.post('/register', payload);
+    return response.data;
+  }
+);
 
 const authSlice = createSlice({
   name: 'auth',
