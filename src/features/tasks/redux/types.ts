@@ -6,7 +6,7 @@ export interface Task {
   status: Status;
   priority: Priority;
   image?: string;
-  dueDate: string;
+  due_date: string;
   description?: string;
 }
 
@@ -14,4 +14,5 @@ export interface TasksState {
   tasks: Task[];
   loading: boolean;
   error?: string;
+  success?: string;
 }

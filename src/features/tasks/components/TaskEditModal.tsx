@@ -19,7 +19,7 @@ const TaskEditModal: React.FC<TaskEditModalProps> = ({
   const [status, setStatus] = useState(task?.status || 'Por hacer');
   const [priority, setPriority] = useState(task?.priority || 'Baja');
   const [image, setImage] = useState(task?.image || '');
-  const [dueDate, setDueDate] = useState(task?.dueDate || '');
+  const [due_date, setdue_date] = useState(task?.due_date || '');
   const [description, setDescription] = useState(task?.description || '');
   const [formErrors, setFormErrors] = useState<{ [key: string]: string }>({});
 
@@ -50,10 +50,10 @@ const TaskEditModal: React.FC<TaskEditModalProps> = ({
         'El nombre no puede comenzar o terminar con "_" o con espacios.';
     }
 
-    if (!dueDate) {
-      errors.dueDate = 'La fecha de entrega es obligatoria.';
-    } else if (dueDate < currentDate) {
-      errors.dueDate =
+    if (!due_date) {
+      errors.due_date = 'La fecha de entrega es obligatoria.';
+    } else if (due_date < currentDate) {
+      errors.due_date =
         'La fecha de entrega no puede ser menor a la fecha de hoy.';
     }
 
@@ -80,7 +80,7 @@ const TaskEditModal: React.FC<TaskEditModalProps> = ({
             status,
             priority,
             image,
-            dueDate,
+            due_date,
             description,
           })
         );
@@ -160,12 +160,12 @@ const TaskEditModal: React.FC<TaskEditModalProps> = ({
           </label>
           <input
             type="date"
-            value={dueDate}
-            onChange={(e) => setDueDate(e.target.value)}
-            className={`p-2 border rounded-lg w-full ${formErrors.dueDate ? 'border-red-500' : ''}`}
+            value={due_date}
+            onChange={(e) => setdue_date(e.target.value)}
+            className={`p-2 border rounded-lg w-full ${formErrors.due_date ? 'border-red-500' : ''}`}
           />
-          {formErrors.dueDate && (
-            <p className="text-red-500 text-sm">{formErrors.dueDate}</p>
+          {formErrors.due_date && (
+            <p className="text-red-500 text-sm">{formErrors.due_date}</p>
           )}
         </div>
         <div className="mb-4">

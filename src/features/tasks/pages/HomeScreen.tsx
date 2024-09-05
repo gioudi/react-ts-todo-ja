@@ -7,12 +7,16 @@ import TaskCard from '../components/TaskCard';
 import TaskEditModal from '../components/TaskEditModal';
 import { Task } from '../redux/types';
 import TaskCreateModal from '../components/TaskCreateModal';
+import SpinnerComponent from '../../../components/Spinner/SpinnerComponent';
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
-  const { tasks, error: gettingError } = useSelector(
-    (state: AppState) => state.tasks
-  );
+  const {
+    tasks,
+    error: gettingError,
+    success,
+    loading
+  } = useSelector((state: AppState) => state.tasks);
   const [alertVisible, setAlertVisible] = useState<boolean>(false);
   const [filteredTasks, setFilteredTasks] = useState(tasks);
   const [searchQuery, setSearchQuery] = useState('');
@@ -22,7 +26,7 @@ const HomeScreen = () => {
   const [priorityFilter, setPriorityFilter] = useState<string | undefined>(
     undefined
   );
-  const [dueDateFilter, setDueDateFilter] = useState<string | undefined>(
+  const [due_dateFilter, setdue_dateFilter] = useState<string | undefined>(
     undefined
   );
   const [currentPage, setCurrentPage] = useState(1);
@@ -50,6 +54,15 @@ const HomeScreen = () => {
   }, [gettingError]);
 
   useEffect(() => {
+    if (success) {
+      setAlertVisible(true);
+      setTimeout(() => {
+        setAlertVisible(false);
+      }, 5000);
+    }
+  }, [success]);
+
+  useEffect(() => {
     let filtered = tasks;
 
     if (searchQuery) {
@@ -66,13 +79,13 @@ const HomeScreen = () => {
       filtered = filtered.filter((task) => task.priority === priorityFilter);
     }
 
-    if (dueDateFilter) {
-      filtered = filtered.filter((task) => task.dueDate === dueDateFilter);
+    if (due_dateFilter) {
+      filtered = filtered.filter((task) => task.due_date === due_dateFilter);
     }
 
     setFilteredTasks(filtered);
     setCurrentPage(1);
-  }, [searchQuery, statusFilter, priorityFilter, dueDateFilter, tasks]);
+  }, [searchQuery, statusFilter, priorityFilter, due_dateFilter, tasks]);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
@@ -82,7 +95,7 @@ const HomeScreen = () => {
     setSearchQuery('');
     setStatusFilter('Todos');
     setPriorityFilter('Todas');
-    setDueDateFilter('');
+    setdue_dateFilter('');
   };
 
   const totalPages = Math.ceil(filteredTasks.length / itemsPerPage);
@@ -100,6 +113,7 @@ const HomeScreen = () => {
   const handleCloseModal = () => {
     setIsModalOpen(false);
     setSelectedTask(null);
+
   };
 
   const handleOpenCreateModal = () => {
@@ -108,15 +122,27 @@ const HomeScreen = () => {
 
   const handleCloseCreateModal = () => {
     setIsCreateModalOpen(false);
+  
   };
+
+  if (loading) {
+    return <SpinnerComponent />;
+  }
 
   return (
     <section className="container mx-auto py-8 px-6 rounded relative bg-white shadow">
-      {gettingError && (
+      {gettingError ? (
         <AlertComponent
           kind="danger"
-          message={'No fue posible obtener las tareas'}
+          message={gettingError}
           title="Error"
+          visible={alertVisible}
+        />
+      ) : (
+        <AlertComponent
+          kind="success"
+          message={success || 'Proceso realizado de manera satisfacoria'}
+          title="Aviso"
           visible={alertVisible}
         />
       )}
@@ -151,9 +177,9 @@ const HomeScreen = () => {
               className="p-2 border rounded-lg w-full"
             >
               <option value="Todos">Todos</option>
-              <option value="Por hacer">Por hacer</option>
-              <option value="En progreso">En progreso</option>
-              <option value="Completado">Completado</option>
+              <option value="To do">Por hacer</option>
+              <option value="In progress">En progreso</option>
+              <option value="Completed">Completado</option>
             </select>
           </div>
           <div>
@@ -166,9 +192,9 @@ const HomeScreen = () => {
               className="p-2 border rounded-lg w-full"
             >
               <option value="Todas">Todas</option>
-              <option value="Baja">Baja</option>
-              <option value="Media">Media</option>
-              <option value="Alta">Alta</option>
+              <option value="Low">Baja</option>
+              <option value="Medium">Media</option>
+              <option value="High">Alta</option>
             </select>
           </div>
           <div>
@@ -177,8 +203,8 @@ const HomeScreen = () => {
             </label>
             <input
               type="date"
-              value={dueDateFilter}
-              onChange={(e) => setDueDateFilter(e.target.value)}
+              value={due_dateFilter}
+              onChange={(e) => setdue_dateFilter(e.target.value)}
               className="p-2 border rounded-lg w-full"
             />
           </div>

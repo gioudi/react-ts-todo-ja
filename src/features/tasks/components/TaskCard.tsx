@@ -12,7 +12,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, grouping, onEdit }) => {
       <h2 className="text-xl font-bold mb-6 overflow-x-hidden">{task.name}</h2>
       {task.image && (
         <img
-          src={task.image}
+          src={task.image }
           alt={task.name}
           className="w-full h-32 object-cover rounded-md mb-2"
         />
@@ -24,7 +24,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, grouping, onEdit }) => {
             <span>Prioridad: {task.priority}</span>
             <br />
             <span>
-              Fecha de entrega: {new Date(task.dueDate).toLocaleDateString()}
+              Fecha de entrega: {new Date(task.due_date).toLocaleDateString()}
             </span>
           </>
         )}
@@ -33,7 +33,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, grouping, onEdit }) => {
             <span>Estado: {task.status}</span>
             <br />
             <span>
-              Fecha de entrega: {new Date(task.dueDate).toLocaleDateString()}
+              Fecha de entrega: {new Date(task.due_date).toLocaleDateString()}
             </span>
           </>
         )}
