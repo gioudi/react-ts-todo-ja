@@ -22,8 +22,10 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "env-cmd -f .env.local react-scripts start",
-    "build": "env-cmd -f .env.local react-scripts build",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "start:local": "env-cmd -f .env.local react-scripts start",
+    "build:local": "env-cmd -f .env.local react-scripts build",
     "test": "jest",
     "test:watch": "jest --watch",
     "eject": "react-scripts eject",

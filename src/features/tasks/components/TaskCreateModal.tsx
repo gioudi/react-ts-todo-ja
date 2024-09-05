@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { handleCreateTask } from '../redux/tasksSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { handleCreateTask, handleFetchTasks } from '../redux/tasksSlice';
+import { AppDispatch, AppState } from '../../../store/store';
 
 interface TaskCreateModalProps {
   isOpen: boolean;
@@ -11,14 +12,15 @@ const TaskCreateModal: React.FC<TaskCreateModalProps> = ({
   isOpen,
   onClose,
 }) => {
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
   const [name, setName] = useState('');
-  const [status, setStatus] = useState('Por hacer');
-  const [priority, setPriority] = useState('Baja');
+  const [status, setStatus] = useState<any>('Por hacer');
+  const [priority, setPriority] = useState<any>('Baja');
   const [image, setImage] = useState('');
-  const [dueDate, setDueDate] = useState('');
+  const [due_date, setdue_date] = useState('');
   const [description, setDescription] = useState('');
   const [formErrors, setFormErrors] = useState<{ [key: string]: string }>({});
+  const { tasks } = useSelector((state: AppState) => state.tasks);
 
   const currentDate = new Date().toISOString().split('T')[0];
 
@@ -46,10 +48,10 @@ const TaskCreateModal: React.FC<TaskCreateModalProps> = ({
         'El nombre no puede comenzar o terminar con "_" o con espacios.';
     }
 
-    if (!dueDate) {
-      errors.dueDate = 'La fecha de entrega es obligatoria.';
-    } else if (dueDate < currentDate) {
-      errors.dueDate =
+    if (!due_date) {
+      errors.due_date = 'La fecha de entrega es obligatoria.';
+    } else if (due_date < currentDate) {
+      errors.due_date =
         'La fecha de entrega no puede ser menor a la fecha de hoy.';
     }
 
@@ -70,11 +72,12 @@ const TaskCreateModal: React.FC<TaskCreateModalProps> = ({
     if (validateForm()) {
       dispatch(
         handleCreateTask({
+          id: tasks.length > 0 ? tasks.length + 1 : 1,
           name,
           status,
           priority,
           image,
-          dueDate,
+          due_date,
           description,
         })
       );
@@ -83,8 +86,8 @@ const TaskCreateModal: React.FC<TaskCreateModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
-      <div className="bg-white p-6 rounded-lg shadow-lg w-11/12 md:w-1/2 lg:w-1/3">
+    <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50  ">
+      <div className="bg-white p-6 rounded-lg shadow-lg w-11/12 md:w-1/2 lg:w-1/3  animate-fadeIn">
         <h3 className="text-xl font-semibold mb-4">Crear Nueva Tarea</h3>
         <div className="mb-4">
           <label className="block text-sm font-semibold">Nombre</label>
@@ -145,12 +148,12 @@ const TaskCreateModal: React.FC<TaskCreateModalProps> = ({
           </label>
           <input
             type="date"
-            value={dueDate}
-            onChange={(e) => setDueDate(e.target.value)}
-            className={`p-2 border rounded-lg w-full ${formErrors.dueDate ? 'border-red-500' : ''}`}
+            value={due_date}
+            onChange={(e) => setdue_date(e.target.value)}
+            className={`p-2 border rounded-lg w-full ${formErrors.due_date ? 'border-red-500' : ''}`}
           />
-          {formErrors.dueDate && (
-            <p className="text-red-500 text-sm">{formErrors.dueDate}</p>
+          {formErrors.due_date && (
+            <p className="text-red-500 text-sm">{formErrors.due_date}</p>
           )}
         </div>
         <div className="mb-4">

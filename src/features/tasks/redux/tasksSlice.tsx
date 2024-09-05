@@ -6,6 +6,7 @@ const initialState: TasksState = {
   tasks: [],
   loading: false,
   error: '',
+  success: '',
 };
 
 export const handleFetchTasks = createAsyncThunk(
@@ -56,9 +57,10 @@ const tasksSlice = createSlice({
       .addCase(handleFetchTasks.fulfilled, (state, action) => {
         state.tasks = action.payload;
         state.loading = false;
+        state.success = 'Obteniendo lista de tareas';
       })
       .addCase(handleFetchTasks.rejected, (state, action) => {
-        state.error = action.error.message || 'Error fetching tasks';
+        state.error = action.error.message || 'Error al traer las tareas';
         state.loading = false;
       })
       .addCase(handleCreateTask.pending, (state) => {
@@ -67,9 +69,11 @@ const tasksSlice = createSlice({
       })
       .addCase(handleCreateTask.fulfilled, (state, action) => {
         state.tasks.push(action.payload);
+        state.loading = false;
+        state.success = 'La tarea se creo de manera satisfactoria';
       })
       .addCase(handleCreateTask.rejected, (state, action) => {
-        state.error = action.error.message || 'Error creating a task';
+        state.error = action.error.message || 'Error creando la tarea';
         state.loading = false;
       })
       .addCase(handleUpdateTask.pending, (state) => {
@@ -83,9 +87,10 @@ const tasksSlice = createSlice({
         if (index !== -1) {
           state.tasks[index] = action.payload;
         }
+        state.success = 'La tarea ha sido actualizada de manera satisfactoria';
       })
       .addCase(handleUpdateTask.rejected, (state, action) => {
-        state.error = action.error.message || 'Error updating a task';
+        state.error = action.error.message || 'Error actualizando la tarea';
         state.loading = false;
       })
       .addCase(handleDeleteTask.pending, (state) => {
@@ -96,9 +101,10 @@ const tasksSlice = createSlice({
         state.tasks = state.tasks.filter(
           (task) => task.id !== Number(action.payload)
         );
+        state.success = 'La tarea ha sido eliminado de manera satisfactoria';
       })
       .addCase(handleDeleteTask.rejected, (state, action) => {
-        state.error = action.error.message || 'Error removing a task';
+        state.error = action.error.message || 'Error borrando la tarea';
         state.loading = false;
       });
   },

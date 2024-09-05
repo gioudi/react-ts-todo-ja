@@ -9,7 +9,8 @@ I used React and Redux for frontend. Moreover as a developer always looking to i
 
 ##Demo
 
-- [Develop]()
+- [Develop](https://deploy-preview-13--todo-jelou.netlify.app/)
+- [Demo](https://main--todo-jelou.netlify.app/)
 
 
 ## Roles
@@ -29,6 +30,10 @@ I used React and Redux for frontend. Moreover as a developer always looking to i
 -- "email": "eve.holt@reqres.in",
 -- "password": "cityslicka"
 
+-- Display tasks: Once you are logged in the web you will be able to see a list fo tasks. Besides you then are able  to filter tasks by search query, status, priority and  dateline.
+
+-- Edit task: Every card has a button to open a modal with the purpose to edit current info. 
+-- Create task: There is a button on above the filter with the purpose to generate a new task.
 
 ## Technologies 💻
 
@@ -59,12 +64,12 @@ I used React and Redux for frontend. Moreover as a developer always looking to i
 
 ## Screenshots
 
-![Screenshot]()
+![Screenshot]('./src/assets/landing.PNGs')
 ![Screenshot]()
 
 ## Links
 1. 
-- [Frontend]()
+- [Frontend](https://main--todo-jelou.netlify.app/)
 - [Backend]()
 - [Jira]()
 - [Figma]()
