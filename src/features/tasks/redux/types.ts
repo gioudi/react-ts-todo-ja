@@ -1,11 +1,17 @@
+type Status = 'Por hacer' | 'En progreso' | 'Completado';
+type Priority = 'Baja' | 'Media' | 'Alta';
 export interface Task {
   id: number;
-  title: string;
-  priority: string;
-  status: string;
-  dateline: Date | string;
+  name: string;
+  status: Status;
+  priority: Priority;
+  image?: string;
+  dueDate: string;
+  description?: string;
 }
 
 export interface TasksState {
   tasks: Task[];
+  loading: boolean;
+  error?: string;
 }
