@@ -54,7 +54,7 @@ I used React and Redux for frontend. Moreover as a developer always looking to i
 ## Installation
 
 1. Clone the repository: `git clone https://github.com/gioudi/react-ts-todo-ja`
-2. Navigate to the project directory: `cd react-ts-todo-jelou-ai`
+2. Navigate to the project directory: `cd react-ts-todo-ja`
 3. Install dependencies:
    - Frontend: `npm install --legacy-per-deeps`
 
